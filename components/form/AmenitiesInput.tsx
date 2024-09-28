@@ -1,13 +1,20 @@
 "use client";
 import { amenities, Amenity } from "@/utils/amenities";
-import { Check } from "lucide-react";
 import React, { useState } from "react";
 import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
 
 const AmenitiesInput = ({ defaultValue }: { defaultValue?: Amenity[] }) => {
+  const amenitiesWithIcons = defaultValue?.map(({ name, selected }) => {
+    return {
+      name,
+      selected,
+      icon: amenities.find((amenity) => amenity.name === name)!.icon,
+    };
+  });
+
   const [selectedAmenities, setSelectedAmenities] = useState<Amenity[]>(
-    defaultValue || amenities
+    amenitiesWithIcons || amenities
   );
 
   const handleChange = (amenity: Amenity) => {
