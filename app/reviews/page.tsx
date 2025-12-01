@@ -2,7 +2,7 @@ import { IconButton } from "@/components/form/Button";
 import FormContainer from "@/components/form/FormContainer";
 import EmptyList from "@/components/home/EmptyList";
 import ReviewCard from "@/components/properties/reviews/ReviewCard";
-import { deleteReviewAction, fetchPropertyReviewsByUser } from "@/lib/action";
+import { deleteReviewAction, fetchPropertyReviewsByUser } from "@/lib/actions/reviews/review-action";
 import React from "react";
 
 export const metadata = {

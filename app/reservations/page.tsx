@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { fetchReservations } from "@/lib/action";
+import { fetchReservations } from "@/lib/actions/bookings/booking-actions";
 import { formatCurrency, formatDate } from "@/utils/formats";
 import Link from "next/link";
 

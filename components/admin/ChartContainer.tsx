@@ -1,4 +1,4 @@
-import { fetchChartsData } from "@/lib/action";
+import { fetchChartsData } from "@/lib/actions/bookings/booking-actions";
 import React from "react";
 import Chart from "./Chart";
 

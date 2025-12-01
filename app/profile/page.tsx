@@ -2,12 +2,13 @@ import FormContainer from "@/components/form/FormContainer";
 import FormInput from "@/components/form/FormInput";
 import ImageInputContainer from "@/components/form/ImageInputContainer";
 import SubmitButton from "@/components/form/Button";
+
+import React from "react";
 import {
   fectchProfile,
-  updateProfileAction,
   updateProfileImageAction,
-} from "@/lib/action";
-import React from "react";
+  updateProfileAction,
+} from "@/lib/actions/user-profile/user-profile-actions";
 
 export const metadata = {
   title: "profile",

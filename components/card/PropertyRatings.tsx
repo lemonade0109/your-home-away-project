@@ -1,4 +1,4 @@
-import { fetchPropertyByRating } from "@/lib/action";
+import { fetchPropertyByRating } from "@/lib/actions/reviews/review-action";
 import React from "react";
 import { FaStar } from "react-icons/fa";
 

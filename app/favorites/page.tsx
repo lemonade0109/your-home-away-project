@@ -1,6 +1,6 @@
 import EmptyList from "@/components/home/EmptyList";
 import PropertiesLists from "@/components/home/PropertiesLists";
-import { fetchFavorites } from "@/lib/action";
+import { fetchFavorites } from "@/lib/actions/favorites/favorite-action";
 import React from "react";
 
 export const metadata = {

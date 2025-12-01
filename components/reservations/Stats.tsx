@@ -1,4 +1,4 @@
-import { fetchReservationStats } from "@/lib/action";
+import { fetchReservationStats } from "@/lib/actions/extras/action";
 import React from "react";
 import StatusCard from "../admin/StatusCard";
 import { formatCurrency } from "@/utils/formats";

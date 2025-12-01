@@ -9,7 +9,7 @@ import ImageInput from "@/components/form/ImageInput";
 import PriceInput from "@/components/form/PriceInput";
 import SubmitButton from "@/components/form/Button";
 import TextAreaInput from "@/components/form/TextAreaInput";
-import { createPropertyAction } from "@/lib/action";
+import { createPropertyAction } from "@/lib/actions/properties/property-actions";
 
 export default function Page() {
   return (

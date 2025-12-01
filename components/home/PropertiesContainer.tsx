@@ -1,4 +1,4 @@
-import { fetchProperties } from "@/lib/action";
+import { fetchProperties } from "@/lib/actions/properties/property-actions";
 import { PropertyCardProps } from "@/utils/types";
 import React from "react";
 import EmptyList from "./EmptyList";

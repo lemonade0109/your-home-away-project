@@ -1,4 +1,4 @@
-import { fetchProfileImage } from "@/lib/action";
+import { fetchProfileImage } from "@/lib/actions/user-profile/user-profile-actions";
 import Image from "next/image";
 import React from "react";
 import { LuUser2 } from "react-icons/lu";

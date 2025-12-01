@@ -1,4 +1,4 @@
-import { fetchStats } from "@/lib/action";
+import { fetchStats } from "@/lib/actions/extras/action";
 import React from "react";
 import StatusCard from "./StatusCard";
 

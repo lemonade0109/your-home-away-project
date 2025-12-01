@@ -1,6 +1,6 @@
 import React from "react";
 import Title from "../Title";
-import { fetchPropertyReviews } from "@/lib/action";
+import { fetchPropertyReviews } from "@/lib/actions/reviews/review-action";
 import ReviewCard from "./ReviewCard";
 
 const PropertyReview = async ({ propertyId }: { propertyId: string }) => {

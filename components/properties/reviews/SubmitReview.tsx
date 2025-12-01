@@ -6,7 +6,7 @@ import RatingInput from "@/components/form/RatingInput";
 import TextAreaInput from "@/components/form/TextAreaInput";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { createReviewAction } from "@/lib/action";
+import { createReviewAction } from "@/lib/actions/reviews/review-action";
 import React, { useState } from "react";
 
 const SubmitReview = ({ propertyId }: { propertyId: string }) => {

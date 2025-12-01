@@ -8,11 +8,12 @@ import FormInput from "@/components/form/FormInput";
 import ImageInputContainer from "@/components/form/ImageInputContainer";
 import PriceInput from "@/components/form/PriceInput";
 import TextAreaInput from "@/components/form/TextAreaInput";
+import { fetchRentalDetails } from "@/lib/actions/properties/rentals/rental-actions";
 import {
-  fetchRentalDetails,
   updatePropertyAction,
   updatePropertyImageAction,
-} from "@/lib/action";
+} from "@/lib/actions/properties/property-actions";
+
 import { Amenity } from "@/utils/amenities";
 import { redirect } from "next/navigation";
 import React from "react";

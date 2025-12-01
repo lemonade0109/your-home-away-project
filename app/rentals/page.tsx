@@ -10,7 +10,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { deleteRentalAction, fecthRentals } from "@/lib/action";
+
+import {
+  deleteRentalAction,
+  fetchRentals,
+} from "@/lib/actions/properties/rentals/rental-actions";
 import { formatCurrency } from "@/utils/formats";
 import Link from "next/link";
 import React from "react";
@@ -20,7 +24,7 @@ export const metadata = {
 };
 
 export default async function Page() {
-  const rentals = await fecthRentals();
+  const rentals = await fetchRentals();
   if (rentals.length === 0) {
     return (
       <EmptyList

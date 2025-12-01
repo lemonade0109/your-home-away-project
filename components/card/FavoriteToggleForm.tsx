@@ -1,6 +1,6 @@
 "use client";
 
-import { toggleFavoriteAction } from "@/lib/action";
+import { toggleFavoriteAction } from "@/lib/actions/favorites/favorite-action";
 import { usePathname } from "next/navigation";
 import React from "react";
 import FormContainer from "../form/FormContainer";

@@ -2,7 +2,7 @@ import React from "react";
 
 import { auth } from "@clerk/nextjs/server";
 import { CardSignInButton } from "../form/Button";
-import { fetchFavoriteId } from "@/lib/action";
+import { fetchFavoriteId } from "@/lib/actions/favorites/favorite-action";
 import FavoriteToggleForm from "./FavoriteToggleForm";
 
 const FavoriteToggleButton = async ({ propertyId }: { propertyId: string }) => {

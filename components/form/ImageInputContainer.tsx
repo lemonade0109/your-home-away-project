@@ -32,7 +32,7 @@ const ImageInputContainer = (props: ImageInputContainerProps) => {
           alt={name}
           width={100}
           height={100}
-          className="rouded object-cover mb-4 w-24 h-24"
+          className="rounded object-cover mb-4 w-24 h-24"
         />
       ) : (
         userIcon
@@ -45,6 +45,7 @@ const ImageInputContainer = (props: ImageInputContainerProps) => {
       >
         {text}
       </Button>
+
       {isUpdateFormVisible && (
         <div className="max-w-lg mt-4">
           <FormContainer action={action}>

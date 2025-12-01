@@ -4,7 +4,7 @@ import { useProperty } from "@/utils/store";
 import { SignInButton, useAuth } from "@clerk/nextjs";
 import React from "react";
 import { Button } from "../ui/button";
-import { createBookingAction } from "@/lib/action";
+import { createBookingAction } from "../../lib/actions/bookings/booking-actions";
 import FormContainer from "../form/FormContainer";
 import SubmitButton from "../form/Button";
 

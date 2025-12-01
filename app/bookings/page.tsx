@@ -11,7 +11,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { deleteBookingsAction, fetchBookings } from "@/lib/action";
+import {
+  fetchBookings,
+  deleteBookingsAction,
+} from "@/lib/actions/bookings/booking-actions";
 import { formatCurrency, formatDate } from "@/utils/formats";
 import Link from "next/link";
 import React from "react";
