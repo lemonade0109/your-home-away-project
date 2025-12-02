@@ -7,6 +7,7 @@ import {
   validateWithZodSchema,
 } from "@/lib/validators";
 import { getAuthUser, renderError } from "@/utils/helpers-function";
+import { uploadImage } from "@/utils/upload";
 import { clerkClient, currentUser } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -43,7 +44,7 @@ export const createProfileAction = async (
   redirect("/");
 };
 
-export const fetchProfileImage = async () => {
+export const getProfileImage = async () => {
   const user = await currentUser();
   if (!user) return null;
 
@@ -59,7 +60,7 @@ export const fetchProfileImage = async () => {
   return profile?.profileImage;
 };
 
-export const fectchProfile = async () => {
+export const getProfile = async () => {
   const user = await getAuthUser();
   const profile = await db.profile.findUnique({
     where: {
@@ -103,7 +104,7 @@ export const updateProfileImageAction = async (
   try {
     const image = formData.get("image") as File;
     const validatedFields = validateWithZodSchema(imageSchema, { image });
-    //TODO: upload image to uploadthing or any other image hosting service
+
     const fullPath = await uploadImage(validatedFields.image);
 
     await db.profile.update({

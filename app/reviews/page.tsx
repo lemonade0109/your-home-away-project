@@ -2,7 +2,10 @@ import { IconButton } from "@/components/form/Button";
 import FormContainer from "@/components/form/FormContainer";
 import EmptyList from "@/components/home/EmptyList";
 import ReviewCard from "@/components/properties/reviews/ReviewCard";
-import { deleteReviewAction, fetchPropertyReviewsByUser } from "@/lib/actions/reviews/review-action";
+import {
+  deleteReviewAction,
+  getPropertyReviewsByUser,
+} from "@/lib/actions/reviews/review-action";
 import React from "react";
 
 export const metadata = {
@@ -10,7 +13,7 @@ export const metadata = {
 };
 
 export default async function Page() {
-  const reviews = await fetchPropertyReviewsByUser();
+  const reviews = await getPropertyReviewsByUser();
   if (reviews.length === 0) return <EmptyList />;
 
   return (

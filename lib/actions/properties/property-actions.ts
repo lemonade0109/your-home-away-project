@@ -7,6 +7,7 @@ import {
   validateWithZodSchema,
 } from "@/lib/validators";
 import { getAuthUser, renderError } from "@/utils/helpers-function";
+import { uploadImage } from "@/utils/upload";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -39,7 +40,7 @@ export const createPropertyAction = async (
   redirect("/");
 };
 
-export const fetchProperties = async ({
+export const getProperties = async ({
   search = "",
   category,
 }: {
@@ -72,7 +73,7 @@ export const fetchProperties = async ({
   return properties;
 };
 
-export const fetchPropertyDetails = async (id: string) => {
+export const getPropertyDetails = async (id: string) => {
   return db.property.findUnique({
     where: {
       id,
@@ -98,6 +99,9 @@ export const updatePropertyAction = async (
 
   try {
     const rawData = Object.fromEntries(formData);
+    // Remove the id field before validation
+    delete rawData.id;
+
     const validatedFields = validateWithZodSchema(propertySchema, rawData);
 
     await db.property.update({
@@ -110,7 +114,7 @@ export const updatePropertyAction = async (
       },
     });
 
-    revalidatePath(`/property/${propertyId}/edit`);
+    revalidatePath(`/rentals/${propertyId}/edit`);
     return { message: "Update Successful" };
   } catch (error) {
     return renderError(error);
@@ -147,4 +151,3 @@ export const updatePropertyImageAction = async (
     return renderError(error);
   }
 };
-

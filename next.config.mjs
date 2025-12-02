@@ -10,6 +10,11 @@ const nextConfig = {
         protocol: "https",
         hostname: "ckhwuwygvapqvoalaehb.supabase.co",
       },
+      {
+        protocol: "https",
+        hostname: "utfs.io",
+        port: "",
+      },
     ],
   },
   // output: "export",

@@ -1,4 +1,4 @@
-import { fetchProperties } from "@/lib/actions/properties/property-actions";
+import { getProperties } from "@/lib/actions/properties/property-actions";
 import { PropertyCardProps } from "@/utils/types";
 import React from "react";
 import EmptyList from "./EmptyList";
@@ -11,7 +11,7 @@ const PropertiesContainer = async ({
   category?: string;
   search?: string;
 }) => {
-  const properties: PropertyCardProps[] = await fetchProperties({
+  const properties: PropertyCardProps[] = await getProperties({
     category,
     search,
   });

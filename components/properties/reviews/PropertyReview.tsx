@@ -1,10 +1,10 @@
 import React from "react";
 import Title from "../Title";
-import { fetchPropertyReviews } from "@/lib/actions/reviews/review-action";
+import { getPropertyReviews } from "@/lib/actions/reviews/review-action";
 import ReviewCard from "./ReviewCard";
 
 const PropertyReview = async ({ propertyId }: { propertyId: string }) => {
-  const reviews = await fetchPropertyReviews(propertyId);
+  const reviews = await getPropertyReviews(propertyId);
   if (reviews.length < 1) return null;
 
   return (

@@ -4,11 +4,7 @@ import db from "@/db/db";
 import { getAuthUser, renderError } from "@/utils/helpers-function";
 import { revalidatePath } from "next/cache";
 
-export const fetchFavoriteId = async ({
-  propertyId,
-}: {
-  propertyId: string;
-}) => {
+export const getFavoriteId = async ({ propertyId }: { propertyId: string }) => {
   const user = await getAuthUser();
   const favorite = await db.favorite.findFirst({
     where: {
@@ -52,7 +48,7 @@ export const toggleFavoriteAction = async (prevState: {
   }
 };
 
-export const fetchFavorites = async () => {
+export const getFavorites = async () => {
   const user = await getAuthUser();
   const favorites = await db.favorite.findMany({
     where: {

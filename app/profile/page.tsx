@@ -5,7 +5,7 @@ import SubmitButton from "@/components/form/Button";
 
 import React from "react";
 import {
-  fectchProfile,
+  getProfile,
   updateProfileImageAction,
   updateProfileAction,
 } from "@/lib/actions/user-profile/user-profile-actions";
@@ -15,7 +15,7 @@ export const metadata = {
 };
 
 export default async function Page() {
-  const profile = await fectchProfile();
+  const profile = await getProfile();
 
   return (
     <section>

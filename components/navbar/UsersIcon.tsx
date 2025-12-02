@@ -1,10 +1,10 @@
-import { fetchProfileImage } from "@/lib/actions/user-profile/user-profile-actions";
+import { getProfileImage } from "@/lib/actions/user-profile/user-profile-actions";
 import Image from "next/image";
 import React from "react";
 import { LuUser2 } from "react-icons/lu";
 
 const UsersIcon = async () => {
-  const profileImage = await fetchProfileImage();
+  const profileImage = await getProfileImage();
 
   if (profileImage) {
     return (

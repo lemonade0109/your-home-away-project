@@ -12,7 +12,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import {
-  fetchBookings,
+  getBookings,
   deleteBookingsAction,
 } from "@/lib/actions/bookings/booking-actions";
 import { formatCurrency, formatDate } from "@/utils/formats";
@@ -24,7 +24,7 @@ export const metadata = {
 };
 
 export default async function Page() {
-  const bookings = await fetchBookings();
+  const bookings = await getBookings();
   if (bookings.length === 0) return <EmptyList />;
 
   return (

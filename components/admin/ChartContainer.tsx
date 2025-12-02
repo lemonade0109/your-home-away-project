@@ -1,9 +1,9 @@
-import { fetchChartsData } from "@/lib/actions/bookings/booking-actions";
+import { getChartsData } from "@/lib/actions/bookings/booking-actions";
 import React from "react";
 import Chart from "./Chart";
 
 const ChartContainer = async () => {
-  const bookings = await fetchChartsData();
+  const bookings = await getChartsData();
 
   if (bookings.length < 1) return null;
 

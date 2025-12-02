@@ -10,14 +10,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { fetchReservations } from "@/lib/actions/bookings/booking-actions";
+import { getReservations } from "@/lib/actions/bookings/booking-actions";
 import { formatCurrency, formatDate } from "@/utils/formats";
 import Link from "next/link";
 
 import React from "react";
 
 export default async function page() {
-  const reservations = await fetchReservations();
+  const reservations = await getReservations();
   if (reservations.length === 0) return <EmptyList />;
 
   return (

@@ -3,7 +3,7 @@
 import db from "@/db/db";
 import { getAdminUser, getAuthUser } from "@/utils/helpers-function";
 
-export const fetchStats = async () => {
+export const getStats = async () => {
   await getAdminUser();
 
   const usersCount = await db.profile.count();
@@ -21,7 +21,7 @@ export const fetchStats = async () => {
   };
 };
 
-export const fetchReservationStats = async () => {
+export const getReservationStats = async () => {
   const user = await getAuthUser();
   const properties = await db.property.count({
     where: {

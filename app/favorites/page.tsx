@@ -1,6 +1,6 @@
 import EmptyList from "@/components/home/EmptyList";
 import PropertiesLists from "@/components/home/PropertiesLists";
-import { fetchFavorites } from "@/lib/actions/favorites/favorite-action";
+import { getFavorites } from "@/lib/actions/favorites/favorite-action";
 import React from "react";
 
 export const metadata = {
@@ -8,7 +8,7 @@ export const metadata = {
 };
 
 export default async function Page() {
-  const favorites = await fetchFavorites();
+  const favorites = await getFavorites();
 
   if (favorites.length === 0) {
     return <EmptyList />;

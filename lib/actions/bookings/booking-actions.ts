@@ -63,7 +63,7 @@ export const createBookingAction = async (prevState: {
   redirect(`/checkout?bookingId=${bookingId}`);
 };
 
-export const fetchBookings = async () => {
+export const getBookings = async () => {
   const user = await getAuthUser();
   const bookings = await db.booking.findMany({
     where: {
@@ -109,7 +109,7 @@ export const deleteBookingsAction = async (prevState: {
   }
 };
 
-export const fetchReservations = async () => {
+export const getReservations = async () => {
   const user = await getAuthUser();
 
   const reservations = await db.booking.findMany({
@@ -137,7 +137,7 @@ export const fetchReservations = async () => {
   return reservations;
 };
 
-export const fetchChartsData = async () => {
+export const getChartsData = async () => {
   await getAdminUser();
   const date = new Date();
   date.setMonth(date.getMonth() - 6);

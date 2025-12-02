@@ -13,7 +13,7 @@ import {
 
 import {
   deleteRentalAction,
-  fetchRentals,
+  getRentals,
 } from "@/lib/actions/properties/rentals/rental-actions";
 import { formatCurrency } from "@/utils/formats";
 import Link from "next/link";
@@ -24,7 +24,7 @@ export const metadata = {
 };
 
 export default async function Page() {
-  const rentals = await fetchRentals();
+  const rentals = await getRentals();
   if (rentals.length === 0) {
     return (
       <EmptyList

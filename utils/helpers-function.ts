@@ -1,12 +1,22 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import db from "@/db/db";
 
 export async function getAuthUser() {
   const user = await currentUser();
 
-  if (!user) throw new Error("You must be logged in to access this route...");
+  if (!user) {
+    throw new Error("You must be logged in to access this route...");
+  }
 
-  if (!user.privateMetadata.hasProfile) redirect("/profile/create");
+  // Check if profile exists in database instead of relying on metadata
+  const profile = await db.profile.findUnique({
+    where: { clerkId: user.id },
+  });
+
+  if (!profile) {
+    throw new Error("Please complete your profile first");
+  }
 
   return user;
 }

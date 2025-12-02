@@ -1,4 +1,4 @@
-import { fetchPropertyByRating } from "@/lib/actions/reviews/review-action";
+import { getPropertyByRating } from "@/lib/actions/reviews/review-action";
 import React from "react";
 import { FaStar } from "react-icons/fa";
 
@@ -9,7 +9,7 @@ const PropertyRatings = async ({
   propertyId: string;
   inPage: boolean;
 }) => {
-  const { rating, count } = await fetchPropertyByRating(propertyId);
+  const { rating, count } = await getPropertyByRating(propertyId);
   if (count === 0) return null;
 
   const className = `flex items-center gap-1 ${inPage ? "text-md" : "text-xs"}`;

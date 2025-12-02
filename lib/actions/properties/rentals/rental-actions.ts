@@ -4,7 +4,7 @@ import db from "@/db/db";
 import { getAuthUser, renderError } from "@/utils/helpers-function";
 import { revalidatePath } from "next/cache";
 
-export const fetchRentals = async () => {
+export const getRentals = async () => {
   const user = await getAuthUser();
   const rentals = await db.property.findMany({
     where: {
@@ -70,7 +70,7 @@ export const deleteRentalAction = async (prevState: { propertyId: string }) => {
   }
 };
 
-export const fetchRentalDetails = async (propertyId: string) => {
+export const getRentalDetails = async (propertyId: string) => {
   const user = await getAuthUser();
   return db.property.findUnique({
     where: {

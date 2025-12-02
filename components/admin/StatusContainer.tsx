@@ -1,9 +1,9 @@
-import { fetchStats } from "@/lib/actions/extras/action";
+import { getStats } from "@/lib/actions/extras/action";
 import React from "react";
 import StatusCard from "./StatusCard";
 
 const StatusContainer = async () => {
-  const data = await fetchStats();
+  const data = await getStats();
 
   return (
     <div className="mt-8 grid md:grid-cols-2 gap-4 lg:grid-cols-3">

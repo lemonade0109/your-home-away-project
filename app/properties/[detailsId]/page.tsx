@@ -11,7 +11,7 @@ import ShareButton from "@/components/properties/ShareButton";
 import UserInfo from "@/components/properties/UserInfo";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
-import { fetchPropertyDetails } from "@/lib/actions/properties/property-actions";
+import { getPropertyDetails } from "@/lib/actions/properties/property-actions";
 import { findExistingReview } from "@/lib/actions/reviews/review-action";
 import { auth } from "@clerk/nextjs/server";
 import dynamic from "next/dynamic";
@@ -40,7 +40,7 @@ export default async function Page({
 }: {
   params: { detailsId: string };
 }) {
-  const property = await fetchPropertyDetails(params.detailsId);
+  const property = await getPropertyDetails(params.detailsId);
   if (!property) redirect("/");
 
   const { baths, bedrooms, beds, guests } = property;

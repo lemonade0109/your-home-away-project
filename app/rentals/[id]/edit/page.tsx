@@ -8,7 +8,7 @@ import FormInput from "@/components/form/FormInput";
 import ImageInputContainer from "@/components/form/ImageInputContainer";
 import PriceInput from "@/components/form/PriceInput";
 import TextAreaInput from "@/components/form/TextAreaInput";
-import { fetchRentalDetails } from "@/lib/actions/properties/rentals/rental-actions";
+import { getRentalDetails } from "@/lib/actions/properties/rentals/rental-actions";
 import {
   updatePropertyAction,
   updatePropertyImageAction,
@@ -19,7 +19,7 @@ import { redirect } from "next/navigation";
 import React from "react";
 
 export default async function page({ params }: { params: { id: string } }) {
-  const property = await fetchRentalDetails(params.id);
+  const property = await getRentalDetails(params.id);
   if (!property) redirect("/");
 
   const defaultAmenities: Amenity[] = JSON.parse(property.amenities);
@@ -67,7 +67,7 @@ export default async function page({ params }: { params: { id: string } }) {
           />
 
           <h3 className="text-lg mt-8 font-medium">Accommodation Details</h3>
-          <CounterInput detail="geusts" defaultValue={property.guests} />
+          <CounterInput detail="guests" defaultValue={property.guests} />
           <CounterInput detail="bedrooms" defaultValue={property.bedrooms} />
           <CounterInput detail="beds" defaultValue={property.beds} />
           <CounterInput detail="baths" defaultValue={property.baths} />
