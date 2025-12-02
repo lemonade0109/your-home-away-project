@@ -17,6 +17,8 @@ const nextConfig = {
       },
     ],
   },
+  // Skip font optimization to avoid Google Fonts fetch during build
+  optimizeFonts: false,
   // output: "export",
 };
 

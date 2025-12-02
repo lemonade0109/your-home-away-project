@@ -18,7 +18,7 @@ export default function CheckoutPage() {
 
   const bookingId = searchParams.get("bookingId");
 
-  const getClientSecret = useCallback(async () => {
+  const fetchClientSecret = useCallback(async () => {
     // Create a Checkout Session
     const response = await axios.post("/api/payment", {
       bookingId: bookingId,
@@ -26,7 +26,7 @@ export default function CheckoutPage() {
     return response.data.clientSecret;
   }, []);
 
-  const options = { getClientSecret };
+  const options = { fetchClientSecret };
 
   return (
     <div id="checkout">
