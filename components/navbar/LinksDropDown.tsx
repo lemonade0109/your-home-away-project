@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 
 import {
   DropdownMenu,
@@ -13,15 +15,21 @@ import { Button } from "../ui/button";
 import { links } from "@/utils/links";
 import SignOutLink from "./SignOutLink";
 import UsersIcon from "./UsersIcon";
-import { SignedOut, SignedIn, SignInButton, SignUpButton } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs/server";
+import {
+  SignedOut,
+  SignedIn,
+  SignInButton,
+  SignUpButton,
+  useAuth,
+} from "@clerk/nextjs";
 
 const LinksDropDown = () => {
-  const { userId } = auth();
-  const isAdminUser = userId === process.env.ADMIN_USER_ID;
+  const { userId } = useAuth();
+  const isAdminUser = userId === process.env.NEXT_PUBLIC_ADMIN_USER_ID;
+  const [open, setOpen] = useState(false);
 
   return (
-    <DropdownMenu>
+    <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" className="flex gap-4 max-w-[100px]">
           <LuAlignLeft className="w-6 h-6" />
@@ -50,7 +58,7 @@ const LinksDropDown = () => {
           {links.map((link) => {
             if (link.label === "admin" && !isAdminUser) return null;
             return (
-              <DropdownMenuItem key={link.href}>
+              <DropdownMenuItem key={link.href} onClick={() => setOpen(false)}>
                 <Link href={link.href} className="capitalize w-full">
                   {link.label}
                 </Link>
@@ -60,7 +68,7 @@ const LinksDropDown = () => {
 
           <DropdownMenuSeparator />
 
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setOpen(false)}>
             <SignOutLink />
           </DropdownMenuItem>
         </SignedIn>

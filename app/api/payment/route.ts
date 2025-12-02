@@ -6,9 +6,22 @@ import { formatDate } from "@/utils/formats";
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
   const requestHeaders = new Headers(req.headers);
-  const origin = requestHeaders.get("origin");
+  const origin =
+    requestHeaders.get("origin") ||
+    process.env.NEXT_PUBLIC_WEBSITE_URL ||
+    "http://localhost:3000";
 
   const { bookingId } = await req.json();
+
+  if (!bookingId) {
+    return Response.json(
+      { error: "Booking ID is required" },
+      {
+        status: 400,
+        statusText: "Bad Request",
+      }
+    );
+  }
 
   const booking = await db.booking.findUnique({
     where: { id: bookingId },
@@ -23,10 +36,13 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
   });
 
   if (!booking) {
-    return Response.json(null, {
-      status: 404,
-      statusText: "Not Found",
-    });
+    return Response.json(
+      { error: "Booking not found" },
+      {
+        status: 404,
+        statusText: "Not Found",
+      }
+    );
   }
   const {
     totalNights,
@@ -42,12 +58,9 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       metadata: { bookingId: booking.id },
       line_items: [
         {
-          // Provide the exact Price ID (for example, pr_1234) of
-          // the product you want to sell
           quantity: 1,
           price_data: {
             currency: "usd",
-
             product_data: {
               name: `${name}`,
               images: [image],
@@ -63,13 +76,23 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       return_url: `${origin}/api/confirm?session_id={CHECKOUT_SESSION_ID}`,
     });
 
+    if (!session.client_secret) {
+      return Response.json(
+        { error: "Failed to generate client secret" },
+        { status: 500 }
+      );
+    }
+
     return Response.json({ clientSecret: session.client_secret });
   } catch (error) {
-    console.log(error);
-
-    return Response.json(null, {
-      status: 500,
-      statusText: "Internal Server Error",
-    });
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
+    return Response.json(
+      { error: errorMessage },
+      {
+        status: 500,
+        statusText: "Internal Server Error",
+      }
+    );
   }
 };

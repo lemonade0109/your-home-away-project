@@ -7,6 +7,8 @@ import { Button } from "../ui/button";
 import FormContainer from "./FormContainer";
 import ImageInput from "./ImageInput";
 import SubmitButton from "./Button";
+import { useRouter } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 
 type ImageInputContainerProps = {
   image: string;
@@ -19,6 +21,18 @@ type ImageInputContainerProps = {
 const ImageInputContainer = (props: ImageInputContainerProps) => {
   const { image, name, action, text } = props;
   const [isUpdateFormVisible, setUpdateFormVisible] = useState(false);
+  const router = useRouter();
+  const { user } = useUser();
+
+  const handleAction = async (prevState: any, formData: FormData) => {
+    const result = await action(prevState, formData);
+    if (result && "message" in result && !result.message.includes("error")) {
+      // Reload Clerk's user data and refresh the page
+      await user?.reload();
+      router.refresh();
+    }
+    return result;
+  };
 
   const userIcon = (
     <LuUser2 className="w-24 h-24 bg-primary rounded text-white mb-4" />
@@ -48,7 +62,7 @@ const ImageInputContainer = (props: ImageInputContainerProps) => {
 
       {isUpdateFormVisible && (
         <div className="max-w-lg mt-4">
-          <FormContainer action={action}>
+          <FormContainer action={handleAction}>
             {props.children}
             <ImageInput />
             <SubmitButton size="sm" />

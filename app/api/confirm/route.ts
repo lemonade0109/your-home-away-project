@@ -9,11 +9,24 @@ export const GET = async (req: NextRequest) => {
   const { searchParams } = new URL(req.url);
   const session_id = searchParams.get("session_id") as string;
 
+  if (!session_id) {
+    return NextResponse.json(
+      { error: "Session ID is required" },
+      {
+        status: 400,
+        statusText: "Bad Request",
+      }
+    );
+  }
+
   try {
     const session = await stripe.checkout.sessions.retrieve(session_id);
     const bookingId = session.metadata?.bookingId;
-    if (session.status !== "complete" || !bookingId) {
-      throw new Error("Something went wrong");
+
+    if (session.payment_status !== "paid" || !bookingId) {
+      throw new Error(
+        `Payment status: ${session.payment_status}, Booking ID: ${bookingId}`
+      );
     }
 
     await db.booking.update({
@@ -21,11 +34,13 @@ export const GET = async (req: NextRequest) => {
       data: { paymentStatus: true },
     });
   } catch (error) {
-    console.log(error);
-    return NextResponse.json(null, {
-      status: 500,
-      statusText: "Internal Server Error",
-    });
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : "Unknown error" },
+      {
+        status: 500,
+        statusText: "Internal Server Error",
+      }
+    );
   }
 
   redirect("/bookings");

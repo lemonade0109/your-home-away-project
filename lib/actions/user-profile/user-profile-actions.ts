@@ -107,11 +107,19 @@ export const updateProfileImageAction = async (
 
     const fullPath = await uploadImage(validatedFields.image);
 
+    // Update database
     await db.profile.update({
       where: {
         clerkId: user.id,
       },
       data: {
+        profileImage: fullPath,
+      },
+    });
+
+    // Update Clerk's user image so it syncs everywhere
+    await clerkClient.users.updateUser(user.id, {
+      publicMetadata: {
         profileImage: fullPath,
       },
     });

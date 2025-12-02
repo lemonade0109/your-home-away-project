@@ -9,13 +9,10 @@ export async function getAuthUser() {
     throw new Error("You must be logged in to access this route...");
   }
 
-  // Check if profile exists in database instead of relying on metadata
-  const profile = await db.profile.findUnique({
-    where: { clerkId: user.id },
-  });
-
-  if (!profile) {
-    throw new Error("Please complete your profile first");
+  // Only check if profile exists when needed, not on every call
+  // This prevents redirect loops on the homepage
+  if (!user.privateMetadata?.hasProfile) {
+    redirect("/profile/create");
   }
 
   return user;

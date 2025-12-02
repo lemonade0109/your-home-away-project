@@ -30,29 +30,32 @@ export const createReviewAction = async (
 };
 
 export const getPropertyReviews = async (propertyId: string) => {
-  const reviews = await db.review.findMany({
-    where: {
-      propertyId,
-    },
-
-    select: {
-      id: true,
-      rating: true,
-      comment: true,
-      profile: {
-        select: {
-          firstName: true,
-          profileImage: true,
+  try {
+    const reviews = await db.review.findMany({
+      where: {
+        propertyId,
+      },
+      select: {
+        id: true,
+        rating: true,
+        comment: true,
+        profile: {
+          select: {
+            firstName: true,
+            profileImage: true,
+          },
         },
       },
-    },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
 
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-
-  return reviews;
+    return reviews;
+  } catch (error) {
+    console.error("Error fetching property reviews:", error);
+    return [];
+  }
 };
 
 export const getPropertyReviewsByUser = async () => {
